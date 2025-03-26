@@ -15,7 +15,7 @@ class InfoUserController extends Controller
     public function create(Request $request){
         $request->validate([
             'full_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email'  => 'required|string|email|max:255',
             'phone' => 'required|string|max:15',
             'date_birth' => 'required|date',
             'adresse' => 'required|string|max:255',
@@ -56,14 +56,21 @@ class InfoUserController extends Controller
         return redirect('/Appointement')->with('success', 'InfoUser created successfully.');
         
     }
+
     public function Appointement(){
         $doctors = User::where('role','doctor')->get();
         return Inertia::render('Malade/FormRendez',['doctors'=>$doctors]);
     }
+
     public function dashboard(){
         $user = Auth::user();
         return Inertia::render('Malade/Dashboard',['user'=>$user]);
     }
+    public function dossier(){
+        $user = Auth::user();
+        return Inertia::render('Malade/Dossier',['user'=>$user]);
+    }
+
 
     public function successPage(Request $request){
        
@@ -80,12 +87,22 @@ class InfoUserController extends Controller
         $appointment->reason = $request->reason;
         $appointment->save();
    
-
         return redirect('/success')->with('success', 'Appointment created successfully.');
     }
     public function Success(){
         $appointment=Appointment::select('users.name as doctor','appointments.dateRendezVous','appointments.reason')
         ->join('users','users.id','=','appointments.doctor')->get()->first();
         return Inertia::render('Malade/successPage',['appointment'=>$appointment]);
+    }
+    public function Patient(){
+
+        $user = Auth::user();
+        $appointment=Appointment::select('users.name','appointments.*')->where('user_id',$user->id)->join('users','users.id','=','appointments.doctor')->paginate(5);
+        return Inertia::render('Malade/Patient',['users'=>$user,'appointment'=>$appointment]);
+    }
+    public function delete($id){
+        $appointment=Appointment::find($id);
+        $appointment->delete();
+        return redirect('/patient')->with('success', 'Appointment deleted successfully.');
     }
 }

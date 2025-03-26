@@ -5,8 +5,8 @@ const TilteHeader = ({
     icon
 }) => {
   return (
-    <div className={`space-y-2 w-full text-black font-bricolage dark:text-neutral-200 ${className}`}>
-        <h1 className="flex items-start text-2xl font-medium font-dm">
+    <div className={`space-y-2 w-full text-white font-bricolage dark:text-neutral-200 ${className}`}>
+        <h1 className="flex items-start text-2xl font-medium font-dm text-white">
         <span>{icon}</span>
         <span>{title}</span>
         </h1>

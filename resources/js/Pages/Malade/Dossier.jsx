@@ -1,21 +1,15 @@
-
-
-
-
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Form from './InfoUser';
 
-
-
-export default function Dashboard({user}) {
+const Dossier = ({user}) => {
     return (<>
         <AuthenticatedLayout
            
         >
             <Head title="Dashboard" />
                {/*  <PatientForm /> */}
-                
+                <Form user={user}/>
                 {console.log(user)}
               
                
@@ -25,3 +19,5 @@ export default function Dashboard({user}) {
         </>
     );
 }
+
+export default Dossier

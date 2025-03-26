@@ -15,6 +15,7 @@ use App\Http\Middleware\DoctorMiddeleware;
 use App\Http\Middleware\MaladeMiddeleware;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Middleware\CheckDossier;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -35,14 +36,22 @@ Route::get('/dashboard/doctor', [DoctorController::class, 'index'])
     ->middleware('doctor')->name('dashboard-doctor');//doctor
 
 Route::get('/dashboard/Admin', [AdminController::class, 'index'])
-    ->middleware('admin')->name('dashboard-admin');//admin
+    ->middleware('admin')->name('dashboard-admin');//admin()
 
 
 //////////
-Route::post('malade',[InfoUserController::class,'create'])->name('malade');
-Route::get('Appointement',[InfoUserController::class,'Appointement'])->name('Appointement');
-Route::post('prendreRendez-vous',[InfoUserController::class,'successPage'])->name('prendreRendez');
-Route::get('success',[InfoUserController::class,'Success'])->name('success');
+Route::get('dossier', [InfoUserController::class, 'dossier'])->middleware(['auth','check.dossier'])->name('dossier');
+//Route::get('dossier',function(){return 'ayoubkhaoua';})->middleware('auth')->name('dossier');
+Route::post('malade',[InfoUserController::class,'create'])->middleware('auth')->name('malade');
+Route::get('Appointement',[InfoUserController::class,'Appointement'])->middleware('auth')->name('Appointement');
+Route::post('prendreRendez-vous',[InfoUserController::class,'successPage'])->middleware('auth')->name('prendreRendez');
+Route::get('success',[InfoUserController::class,'Success'])->middleware('auth')->name('success');
+Route::get('patient',[InfoUserController::class,'Patient'])->middleware('auth')->name('Patient');
+Route::get('delete/{id}',[InfoUserController::class,'delete'])->middleware('auth')->name('deleteApointment');
+///////////////doctor
+Route::get('accept/{id}',[DoctorController::class,'accepet'])->middleware('auth')->name('accept');
+Route::get('cancel/{id}',[DoctorController::class,'cancel'])->middleware('auth')->name('cancel');
+
 
 
 Route::middleware('auth')->group(function () {

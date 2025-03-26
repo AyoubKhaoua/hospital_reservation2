@@ -1,9 +1,12 @@
 <?php
 
 use App\Models\Admin;
+use App\Http\Middleware\CheckDossier;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\AdminMiddeleware;
+
 use App\Http\Middleware\DoctorMiddeleware;
+
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -22,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             [
                 'admin'=>AdminMiddeleware::class,
                 'doctor'=>DoctorMiddeleware::class,
+                'check.dossier' => CheckDossier::class,
             ]
         );
 

@@ -26,4 +26,6 @@ class InfoUser extends Model
         'indetificationNumber',
         'file',
     ];
+   
+
 }
