@@ -46,7 +46,7 @@ Route::post('malade',[InfoUserController::class,'create'])->middleware('auth')->
 Route::get('Appointement',[InfoUserController::class,'Appointement'])->middleware('auth')->name('Appointement');
 Route::post('prendreRendez-vous',[InfoUserController::class,'successPage'])->middleware('auth')->name('prendreRendez');
 Route::get('success',[InfoUserController::class,'Success'])->middleware('auth')->name('success');
-Route::get('patient',[InfoUserController::class,'Patient'])->middleware('auth')->name('Patient');
+Route::get('patient',[InfoUserController::class,'Patient'])->middleware('auth')->name('patient');
 Route::get('delete/{id}',[InfoUserController::class,'delete'])->middleware('auth')->name('deleteApointment');
 ///////////////doctor
 Route::get('accept/{id}',[DoctorController::class,'accepet'])->middleware('auth')->name('accept');

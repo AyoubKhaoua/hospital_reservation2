@@ -2,17 +2,18 @@ import { Link } from '@inertiajs/react';
 import React from 'react';
 
 const TableClient = ({ appointments,page,links}) => {
-    const handlePrevious = () => {
-        if(page > 1){
-            page = window.location.href =`?page=${page - 1}`;
-        }
-      };
-     const handleNext = () => {
-        if(page < links.length-1){
-            page = window.location.href =`?page=${page + 1}`;
-        }
-        
-      }; 
+  
+  const handlePrevious = () => {
+    if(page > 1){
+        page = window.location.href =`?page=${page - 1}`;
+    }
+  };
+ const handleNext = () => {
+    if(page < links.length-1){
+        page = window.location.href =`?page=${page + 1}`;
+    }
+    
+  }; 
   return (
     <div className="w-full border border-neutral-800 rounded-t-lg mt-12">
       <table className="w-full rounded-t-xl text-left">
@@ -34,12 +35,12 @@ const TableClient = ({ appointments,page,links}) => {
               <td className="text-xs">{appointment.dateRendezVous}</td>
               <td className="text-xs">
                 <span
-                  className={`p-1 px-2 rounded-full flex items-center gap-1 w-fit ${
-                    appointment.status === 'accepte'
-                      ? 'text-green-500 bg-green-500/15'
-                      : appointment.status === 'attente'
-                      ? 'text-orange-500 bg-orange-500/15'
-                      : 'text-red-500 bg-red-500/15'
+                   className={`p-1 px-2 rounded-full flex items-center gap-1 w-fit ${
+                    appointment.status === "accepte"
+                      ? "text-green-500 bg-green-500/15"
+                      : appointment.status === "attente"
+                      ? "text-orange-500 bg-orange-500/15"
+                      : "text-red-500 bg-red-500/15"
                   }`}
                 >
                   <span>

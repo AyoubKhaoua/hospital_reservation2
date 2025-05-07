@@ -18,10 +18,11 @@ export default function Register() {
     };
 
     return (
-        <div className="w-full h-screen flex bg-[#131619] text-white">
+        <div className="w-full flex bg-[#131619] text-white ">
+       
         <div className="flex-1 flex flex-col items-center justify-center gap-4">
           <div className="w-1/2 font-plus space-y-2">
-            <h1 className="text-4xl font-semibold">Hi there, ....</h1>
+            <h1 className="text-4xl font-semibold">👋Hi there, ....</h1>
             <p className="text-white/45 font">Get Started with Appointments.</p>
           </div>
           <form onSubmit={submit} className="w-1/2 space-y-1 font-plus">

@@ -15,15 +15,19 @@ class DoctorController extends Controller
     {
         $user = Auth::user();
         $Countattente =DB::select("call Countattent($user->id)");
+        $Countrefuse =DB::select("call Countrefuse($user->id)");
+        $Countaccepte =DB::select("call Countaccepte($user->id)");
 
        
         $appointments = Appointment::select('users.name as patient','appointments.*')
-        ->join('users','users.id','=','appointments.user_id')->where('doctor', $user->id )->get();
+        ->join('users','users.id','=','appointments.user_id')->where('doctor', $user->id )->paginate(5);
 
         return Inertia::render('Doctor/Docdashboard', [
             'doctor' => $user,
             'appointments' => $appointments,
             'Countattente' => $Countattente[0]->attente
+            , 'Countrefuse' => $Countrefuse[0]->refuse
+            , 'Countaccepte' => $Countaccepte[0]->accepte
         ]);
     }
     public function accepet(Request $req){
